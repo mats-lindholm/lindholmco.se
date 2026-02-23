@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lindholm Co - Digital Kompetens & AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #ffffff;
+            --bg-muted: #f9fafb;
+            --text-heading: #000000;
+            --text-body: #4b5563;
+            --primary: #0f172a;
+            --primary-hover: #1e293b;
+            --border: #e5e7eb;
+            --transition: all 0.2s ease-in-out;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 0.5rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-body);
+            background-color: var(--bg-base);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-heading);
+            line-height: 1.2;
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-load {
+            opacity: 0;
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-muted);
+            border-color: #d1d5db;
+        }
+
+        /* Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            letter-spacing: -0.02em;
+        }
+
+        .desktop-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--text-heading);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-heading);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 0 6rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-body);
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* Skills */
+        .skills-section {
+            background-color: var(--bg-muted);
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--text-heading);
+            font-weight: 500;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .skills-container span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skills-container span::after {
+            content: "·";
+            color: #9ca3af;
+            margin-left: 2rem;
+        }
+
+        .skills-container span:last-child::after {
+            display: none;
+        }
+
+        /* Generic Section */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* Cards Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: #d1d5db;
+        }
+
+        /* Services */
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--bg-muted);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Projects */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--bg-muted);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-heading);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            margin-bottom: 1.5rem;
+            min-height: 4.8rem;
+        }
+
+        .project-link {
+            font-weight: 600;
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .facts-box {
+            background-color: var(--bg-muted);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+        }
+
+        .fact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .fact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .fact-icon {
+            font-size: 1.25rem;
+        }
+
+        .fact-content strong {
+            display: block;
+            color: var(--text-heading);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Contact */
+        .contact-section {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .contact-section h2 {
+            color: white;
+        }
+
+        .contact-text {
+            color: #d1d5db;
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .email-link {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 0.25rem;
+        }
+
+        .email-link:hover {
+            border-bottom-color: white;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-body);
+            font-size: 0.9rem;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skills-container {
+                gap: 1rem;
+            }
+
+            .skills-container span::after {
+                content: "·";
+                margin-left: 1rem;
+            }
+
+            .contact-section {
+                padding: 4rem 1rem;
+            }
+
+            .email-link {
+                font-size: 1.75rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Lindholm Co</a>
+            <nav class="desktop-nav">
+                <a href="#tjanster">Tjänster</a>
+                <a href="#projekt">Projekt</a>
+                <a href="#om-mig">Om mig</a>
+                <a href="#kontakt">Kontakt</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#tjanster">Tjänster</a>
+            <a href="#projekt">Projekt</a>
+            <a href="#om-mig">Om mig</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="container hero animate-on-load">
+            <h1>Bred digital kompetens – sedan 1997.</h1>
+            <p>Välkommen till Lindholm Co. Jag hjälper företag och organisationer att ta tillvara kraften i data, digital annonsering och moderna AI-verktyg – med en praktisk approach och lång erfarenhet i bagaget.</p>
+            <div class="hero-actions">
+                <a href="#projekt" class="btn btn-primary">Se mina projekt</a>
+                <a href="#kontakt" class="btn btn-outline">Hör av dig</a>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section animate-on-load delay-1">
+            <div class="container skills-container">
+                <span>Google Analytics</span>
+                <span>Search Console</span>
+                <span>Tag Manager</span>
+                <span>Google Ads</span>
+                <span>Looker Studio</span>
+                <span>Meta Ads</span>
+                <span>TikTok Ads</span>
+                <span>BI & Data</span>
+                <span>AI-verktyg</span>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="tjanster" class="section container animate-on-load delay-2">
+            <div class="section-header">
+                <h2 class="section-title">Vad jag kan hjälpa dig med</h2>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    </div>
+                    <h3 class="service-title">Digital annonsering</h3>
+                    <p>Strategi, uppsättning och löpande optimering av betald annonsering i Google Ads, Meta och TikTok. Fokus på rätt målgrupp, rätt budskap och mätbara resultat.</p>
+                </div>
+                <div class="card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3 class="service-title">Webbanalys & spårning</h3>
+                    <p>Uppsättning och konfiguration av Google Analytics 4, Search Console och Tag Manager. Du ska alltid veta vad som händer på din webbplats och varför.</p>
+                </div>
+                <div class="card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                    </div>
+                    <h3 class="service-title">BI & datavisualisering</h3>
+                    <p>Dashboards och rapporter i Looker Studio som ger tydlig överblick – oavsett om det gäller försäljning, trafik eller nyckeltal.</p>
+                </div>
+                <div class="card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                    </div>
+                    <h3 class="service-title">AI-lösningar</h3>
+                    <p>Verktyg och flöden som använder AI för att spara tid och skapa värde. Automatiserad omvärldsbevakning, innehållsanalys och sammanfattningar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projekt" class="section container animate-on-load delay-3">
+            <div class="section-header">
+                <h2 class="section-title">Några saker jag har byggt</h2>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <span class="badge">AI · Automatisering</span>
+                    <h3 class="project-title">AI-pulsen</h3>
+                    <p class="project-desc">En AI-driven tjänst för omvärldsbevakning som automatiskt samlar, analyserar och sammanfattar nyheter och trender inom valda ämnesområden.</p>
+                    <a href="https://ai-pulsen.com" target="_blank" rel="noopener noreferrer" class="project-link">Besök tjänsten &rarr;</a>
+                </div>
+                <div class="card">
+                    <span class="badge">BI · Datavisualisering</span>
+                    <h3 class="project-title">Looker Studio Analysrapport</h3>
+                    <p class="project-desc">Interaktiv rapport i Looker Studio som visualiserar data på ett tydligt och lättillgängligt sätt – byggt för att ge beslutsunderlag utan teknisk förkunskap.</p>
+                    <a href="https://lookerstudio.google.com/reporting/e4c15564-9e1d-4b36-acaa-44f9dae7eb58" target="_blank" rel="noopener noreferrer" class="project-link">Se rapporten &rarr;</a>
+                </div>
+                <div class="card">
+                    <span class="badge">BI · Utbildning</span>
+                    <h3 class="project-title">Nationella prov 2025</h3>
+                    <p class="project-desc">Visualisering av data från nationella prov 2025 – ett exempel på hur Looker Studio kan göra komplex data begriplig för en bredare publik.</p>
+                    <a href="https://lookerstudio.google.com/reporting/7a207c75-32a6-4917-a28e-a9a260c7ec78" target="_blank" rel="noopener noreferrer" class="project-link">Se rapporten &rarr;</a>
+                </div>
+                <div class="card">
+                    <span class="badge">BI · Enterprise</span>
+                    <h3 class="project-title">BI-funktion, Helsingborg Arena...</h3>
+                    <p class="project-desc">Byggde upp BI-funktionen från grunden – dataflöden, nyckeltal och dashboards i Looker Studio som stödde organisationens löpande arbete och strategiska beslut.</p>
+                    <span class="badge" style="background-color: transparent; border-color: transparent; padding-left:0;">✓ Referensuppdrag</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="om-mig" class="section container animate-on-load delay-4">
+            <div class="section-header">
+                <h2 class="section-title">Mats Lindholm</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Lindholm Co grundades i februari 1997 och har sedan dess hjälpt kunder med digital marknadsföring, analys och teknik. Med nästan 30 år i branschen har jag sett internet växa upp – och jag har följt med hela vägen.</p>
+                    <p>Jag har djup erfarenhet av hela det digitala ekosystemet: från att planera och optimera annonskampanjer i Google Ads, Meta och TikTok, till att bygga BI-lösningar och automatiserade rapporter i Looker Studio. De senaste åren har jag adderat AI-verktyg till verktygslådan och bygger nu tjänster som gör det möjligt för fler att dra nytta av vad AI kan erbjuda.</p>
+                </div>
+                <div class="facts-box">
+                    <div class="fact-item">
+                        <span class="fact-icon">📅</span>
+                        <div class="fact-content">
+                            <strong>Grundat</strong>
+                            <span>1997</span>
+                        </div>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-icon">📍</span>
+                        <div class="fact-content">
+                            <strong>Ort</strong>
+                            <span>Helsingborg</span>
+                        </div>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-icon">🔧</span>
+                        <div class="fact-content">
+                            <strong>Specialitet</strong>
+                            <span>Data, Analys & AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="kontakt" class="contact-section">
+            <div class="container animate-on-load">
+                <h2 class="section-title" style="margin-bottom: 1.5rem;">Hör av dig</h2>
+                <p class="contact-text">Har du ett projekt du vill diskutera, eller vill du veta mer om vad jag kan bidra med? Skicka ett mejl så återkommer jag inom kort.</p>
+                <a href="mailto:mats@lindholmco.se" class="email-link">mats@lindholmco.se</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div>&copy; 2026 Lindholm Co</div>
+            <div><a href="mailto:mats@lindholmco.se">mats@lindholmco.se</a></div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileLinks = mobileNav.querySelectorAll('a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
