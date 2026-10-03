@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lindholm Co - Digital Kompetens & AI</title>
+    <title>Lindholm Co – Data, analys &amp; AI-flöden</title>
+    <meta name="description" content="Mats Lindholm hjälper företag och organisationer med dataanalys, AI-flöden, automatisering och digital marknadsföring. Se Arbetsmarknadspulsen och andra projekt.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -19,7 +20,8 @@
             --primary: #0f172a;
             --primary-hover: #1e293b;
             --border: #e5e7eb;
-            --transition: all 0.2s ease-in-out;
+            --transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+                border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --radius: 0.5rem;
@@ -347,6 +349,85 @@
             text-decoration: underline;
         }
 
+        .hero .hero-eyebrow {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .featured-project {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            align-items: center;
+            gap: 3rem;
+            padding: 3rem;
+            background: var(--bg-muted);
+        }
+
+        .featured-project .project-title {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            overflow-wrap: anywhere;
+        }
+
+        .featured-project .project-desc {
+            min-height: 0;
+        }
+
+        .featured-project .btn {
+            text-align: center;
+        }
+
+        .project-workflow {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+        }
+
+        .workflow-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-workflow ol {
+            list-style: none;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-workflow li {
+            display: flex;
+            gap: 1rem;
+            align-items: baseline;
+        }
+
+        .workflow-number {
+            color: #64748b;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .project-workflow strong {
+            display: block;
+            color: var(--text-heading);
+        }
+
+        .project-workflow li div > span {
+            font-size: 0.9rem;
+        }
+
+        section[id] {
+            scroll-margin-top: 6rem;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: 4px;
+        }
+
         /* About */
         .about-grid {
             display: grid;
@@ -445,8 +526,27 @@
                 display: block;
             }
 
+            .hero {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
+            }
+
+            .hero-actions {
+                flex-wrap: wrap;
+            }
+
+            .featured-project {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+
+            .project-workflow {
+                padding: 1.25rem;
             }
 
             .hero p {
@@ -485,6 +585,28 @@
                 text-align: center;
             }
         }
+
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .email-link {
+                font-size: clamp(1.125rem, 6vw, 1.75rem);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-on-load {
+                animation: none;
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -499,7 +621,7 @@
                 <a href="#om-mig">Om mig</a>
                 <a href="#kontakt">Kontakt</a>
             </nav>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Öppna meny" aria-controls="mobileNav" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="4" x2="20" y1="12" y2="12" />
@@ -519,9 +641,11 @@
     <main>
         <!-- Hero Section -->
         <section class="container hero animate-on-load">
-            <h1>Bred digital kompetens – sedan 1997.</h1>
-            <p>Välkommen till Lindholm Co. Jag hjälper företag och organisationer att ta tillvara kraften i data,
-                digital annonsering och moderna AI-verktyg – med en praktisk approach och lång erfarenhet i bagaget.</p>
+            <p class="hero-eyebrow">Lindholm Co · Digital erfarenhet sedan 1997</p>
+            <h1>Från data till insikt – och fungerande AI-flöden.</h1>
+            <p>Jag hjälper företag och organisationer att förstå sin data, förbättra sin marknadsföring och utveckla
+                arbetsprocesser med AI. Jag kombinerar lång erfarenhet med praktiskt byggande – från dashboards och
+                analysverktyg till automatiserade informationsflöden.</p>
             <div class="hero-actions">
                 <a href="#projekt" class="btn btn-primary">Se mina projekt</a>
                 <a href="#kontakt" class="btn btn-outline">Hör av dig</a>
@@ -539,7 +663,7 @@
                 <span>Meta Ads</span>
                 <span>TikTok Ads</span>
                 <span>BI & Data</span>
-                <span>AI-verktyg</span>
+                <span>AI-flöden &amp; automatisering</span>
             </div>
         </section>
 
@@ -553,25 +677,14 @@
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <circle cx="12" cy="12" r="6" />
-                            <circle cx="12" cy="12" r="2" />
+                            <path
+                                d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
                         </svg>
                     </div>
-                    <h3 class="service-title">Digital annonsering</h3>
-                    <p>Strategi, uppsättning och löpande optimering av betald annonsering i Google Ads, Meta och TikTok.
-                        Fokus på rätt målgrupp, rätt budskap och mätbara resultat.</p>
-                </div>
-                <div class="card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Webbanalys & spårning</h3>
-                    <p>Uppsättning och konfiguration av Google Analytics 4, Search Console och Tag Manager. Du ska
-                        alltid veta vad som händer på din webbplats och varför.</p>
+                    <h3 class="service-title">AI-flöden &amp; automatisering</h3>
+                    <p>Jag utvecklar arbetsflöden där AI, data och befintliga verktyg samverkar. Det kan handla om att
+                        samla in information, analysera underlag och ta fram rapporter eller beslutsstöd – med tydliga
+                        kontroller och mänsklig granskning där det behövs.</p>
                 </div>
                 <div class="card">
                     <div class="service-icon">
@@ -591,13 +704,25 @@
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                         </svg>
                     </div>
-                    <h3 class="service-title">AI-lösningar</h3>
-                    <p>Verktyg och flöden som använder AI för att spara tid och skapa värde. Automatiserad
-                        omvärldsbevakning, innehållsanalys och sammanfattningar.</p>
+                    <h3 class="service-title">Webbanalys & spårning</h3>
+                    <p>Uppsättning och konfiguration av Google Analytics 4, Search Console och Tag Manager. Du ska
+                        alltid veta vad som händer på din webbplats och varför.</p>
+                </div>
+                <div class="card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="12" r="6" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Digital annonsering</h3>
+                    <p>Strategi, uppsättning och löpande optimering av betald annonsering i Google Ads, Meta och TikTok.
+                        Fokus på rätt målgrupp, rätt budskap och mätbara resultat.</p>
                 </div>
             </div>
         </section>
@@ -608,13 +733,43 @@
                 <h2 class="section-title">Några saker jag har byggt</h2>
             </div>
             <div class="grid-2">
+                <article class="card featured-project">
+                    <div>
+                        <span class="badge">Utvalt projekt · Arbetsmarknadsanalys</span>
+                        <h3 class="project-title">Arbetsmarknadspulsen</h3>
+                        <p class="project-desc">Ett verktyg för att utforska hur roller och kompetensbehov förändras.
+                            Arbetsmarknadspulsen samlar jobbannonser, utbildningsdata och regionala perspektiv
+                            som underlag för frågor om rekrytering och kompetensutveckling.</p>
+                        <p class="project-desc">Ett exempel på hur jag bygger hela vägen från data till ett
+                            användbart analysverktyg.</p>
+                        <a href="https://ai-pulsen.com/arbetsmarknadspulsen" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-primary">Utforska Arbetsmarknadspulsen &rarr;</a>
+                    </div>
+                    <div class="project-workflow" aria-label="Från data till användbart verktyg">
+                        <p class="workflow-label">Från data till användbart verktyg</p>
+                        <ol>
+                            <li><span class="workflow-number" aria-hidden="true">01</span><div><strong>Samla data</strong><span>Skapa ett strukturerat underlag.</span></div></li>
+                            <li><span class="workflow-number" aria-hidden="true">02</span><div><strong>Gör den begriplig</strong><span>Bearbeta, analysera och visualisera.</span></div></li>
+                            <li><span class="workflow-number" aria-hidden="true">03</span><div><strong>Låt användaren utforska</strong><span>Gör analysen tillgänglig i ett verktyg.</span></div></li>
+                        </ol>
+                    </div>
+                </article>
                 <div class="card">
-                    <span class="badge">AI · Automatisering</span>
-                    <h3 class="project-title">AI-pulsen</h3>
-                    <p class="project-desc">En AI-driven tjänst för omvärldsbevakning som automatiskt samlar, analyserar
-                        och sammanfattar nyheter och trender inom valda ämnesområden.</p>
-                    <a href="https://ai-pulsen.com" target="_blank" rel="noopener noreferrer" class="project-link">Besök
-                        tjänsten &rarr;</a>
+                    <span class="badge">Analys · Rapporter</span>
+                    <h3 class="project-title">AI-Pulsen</h3>
+                    <p class="project-desc">Rapporter och analyser om AI, kompetenskrav och rekryteringsmönster i Sverige.
+                        Bygger på arbetsmarknadsdata och gör komplexa frågor begripliga, med tydliga källor och
+                        avgränsningar.</p>
+                    <a href="https://ai-pulsen.com" target="_blank" rel="noopener noreferrer" class="project-link">Läs rapporterna &rarr;</a>
+                </div>
+                <div class="card">
+                    <span class="badge">BI · Enterprise</span>
+                    <h3 class="project-title">BI-funktion, Helsingborg Arena...</h3>
+                    <p class="project-desc">Byggde upp BI-funktionen från grunden – dataflöden, nyckeltal och dashboards
+                        i Looker Studio som stödde organisationens löpande arbete och strategiska beslut.</p>
+                    <span class="badge"
+                        style="background-color: transparent; border-color: transparent; padding-left:0;">✓
+                        Referensuppdrag</span>
                 </div>
                 <div class="card">
                     <span class="badge">Webbapp · Utbildning</span>
@@ -625,13 +780,6 @@
                         class="project-link">Besök webbappen &rarr;</a>
                 </div>
                 <div class="card">
-                    <span class="badge">BI · Trendanalys</span>
-                    <h3 class="project-title">AI-jobbmarknad Sverige</h3>
-                    <p class="project-desc">Interaktiv trendrapport som analyserar efterfrågan på AI-kompetens i Sverige. Baserad på realtidsdata för att ge insikter om branschutveckling.</p>
-                    <a href="https://lookerstudio.google.com/u/0/reporting/e4c15564-9e1d-4b36-acaa-44f9dae7eb58"
-                        target="_blank" rel="noopener noreferrer" class="project-link">Se trendrapporten &rarr;</a>
-                </div>
-                <div class="card">
                     <span class="badge">BI · Utbildning</span>
                     <h3 class="project-title">Nationella prov 2025</h3>
                     <p class="project-desc">Visualisering av data från nationella prov 2025 – ett exempel på hur Looker
@@ -640,20 +788,18 @@
                         target="_blank" rel="noopener noreferrer" class="project-link">Se rapporten &rarr;</a>
                 </div>
                 <div class="card">
+                    <span class="badge">BI · Trendanalys</span>
+                    <h3 class="project-title">AI-jobbmarknad Sverige</h3>
+                    <p class="project-desc">Interaktiv trendrapport som utforskar AI-kompetens i svenska jobbannonser. Ett exempel på hur annonsdata kan användas för att undersöka kompetenskrav och trender.</p>
+                    <a href="https://lookerstudio.google.com/u/0/reporting/e4c15564-9e1d-4b36-acaa-44f9dae7eb58"
+                        target="_blank" rel="noopener noreferrer" class="project-link">Se trendrapporten &rarr;</a>
+                </div>
+                <div class="card">
                     <span class="badge">BI · Regional Analys</span>
                     <h3 class="project-title">Regional AI-analys: Skåne</h3>
                     <p class="project-desc">En djupdykning i AI-jobbmarknaden specifikt för Skåne. Visualiserar lokala trender och kompetensbehov i regionen.</p>
                     <a href="https://lookerstudio.google.com/u/0/reporting/c383c412-a644-4a12-857f-eb770635a05b/page/N4TnF"
                         target="_blank" rel="noopener noreferrer" class="project-link">Se rapporten &rarr;</a>
-                </div>
-                <div class="card">
-                    <span class="badge">BI · Enterprise</span>
-                    <h3 class="project-title">BI-funktion, Helsingborg Arena...</h3>
-                    <p class="project-desc">Byggde upp BI-funktionen från grunden – dataflöden, nyckeltal och dashboards
-                        i Looker Studio som stödde organisationens löpande arbete och strategiska beslut.</p>
-                    <span class="badge"
-                        style="background-color: transparent; border-color: transparent; padding-left:0;">✓
-                        Referensuppdrag</span>
                 </div>
             </div>
         </section>
@@ -668,10 +814,11 @@
                     <p>Lindholm Co grundades i februari 1997 och har sedan dess hjälpt kunder med digital
                         marknadsföring, analys och teknik. Med nästan 30 år i branschen har jag sett internet växa upp –
                         och jag har följt med hela vägen.</p>
-                    <p>Jag har djup erfarenhet av hela det digitala ekosystemet: från att planera och optimera
-                        annonskampanjer i Google Ads, Meta och TikTok, till att bygga BI-lösningar och automatiserade
-                        rapporter i Looker Studio. De senaste åren har jag adderat AI-verktyg till verktygslådan och
-                        bygger nu tjänster som gör det möjligt för fler att dra nytta av vad AI kan erbjuda.</p>
+                    <p>Jag arbetar med dataanalys, BI och digital marknadsföring och bygger även AI-flöden och
+                        analysverktyg. Arbetsmarknadspulsen och AI-Pulsen är exempel på hur jag kombinerar datainsamling,
+                        bearbetning och analys med verktyg och rapporter som andra kan använda. Jag hjälper också
+                        verksamheter att identifiera vilka delar av en arbetsprocess som kan automatiseras och var
+                        mänsklig bedömning behövs.</p>
                 </div>
                 <div class="facts-box">
                     <div class="fact-item">
@@ -703,8 +850,8 @@
         <section id="kontakt" class="contact-section">
             <div class="container animate-on-load">
                 <h2 class="section-title" style="margin-bottom: 1.5rem;">Hör av dig</h2>
-                <p class="contact-text">Har du ett projekt du vill diskutera, eller vill du veta mer om vad jag kan
-                    bidra med? Skicka ett mejl så återkommer jag inom kort.</p>
+                <p class="contact-text">Vill du få bättre grepp om din data eller undersöka hur AI kan förenkla ett återkommande
+                    arbetsflöde? Berätta vad du vill förbättra, så tar vi det därifrån.</p>
                 <a href="mailto:mats@lindholmco.se" class="email-link">mats@lindholmco.se</a>
             </div>
         </section>
@@ -724,13 +871,17 @@
         const mobileLinks = mobileNav.querySelectorAll('a');
 
         mobileMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.toggle('open');
+            const isOpen = mobileNav.classList.toggle('open');
+            mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+            mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
         });
 
         // Close mobile menu on link click
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileNav.classList.remove('open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.setAttribute('aria-label', 'Öppna meny');
             });
         });
     </script>
